@@ -60,7 +60,7 @@ const Form = ({ toast }) => {
       });
       const res = await response.json();
       if(res.response){
-        toast.success("Submitted");
+        toast.success("Successfully Submitted. Your Transaction ID:- "+res.ID);
       }else{
         toast.error("Internal Server Error!!");
       }
@@ -173,40 +173,40 @@ const Form = ({ toast }) => {
                 <option disabled={true} value="">
                   choose...
                 </option>
-                <option name="January" value="Jan">
+                <option name="January" value="January">
                   January
                 </option>
-                <option name="February" value="Feb">
+                <option name="February" value="February">
                   February
                 </option>
-                <option name="March" value="Mar">
+                <option name="March" value="March">
                   March
                 </option>
-                <option name="April" value="Apr">
+                <option name="April" value="April">
                   April
                 </option>
                 <option name="May" value="May">
                   May
                 </option>
-                <option name="June" value="Jun">
+                <option name="June" value="June">
                   June
                 </option>
-                <option name="July" value="Jul">
+                <option name="July" value="July">
                   July
                 </option>
-                <option name="August" value="Aug">
+                <option name="August" value="August">
                   August
                 </option>
-                <option name="September" value="Sep">
+                <option name="September" value="September">
                   September
                 </option>
-                <option name="October" value="Oct">
+                <option name="October" value="October">
                   October
                 </option>
-                <option name="November" value="Nov">
+                <option name="November" value="November">
                   November
                 </option>
-                <option name="December" value="Dec">
+                <option name="December" value="December">
                   December
                 </option>
               </select>
