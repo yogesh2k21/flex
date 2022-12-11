@@ -21,15 +21,15 @@ const Form = ({ toast }) => {
       toast.error("Age should be under 18 to 65!!");
       return false;
     }
-    if (formData.phone.length != 10) {
+    if (formData.phone.length !== 10) {
       toast.error("Mobile should be 10 digit!!");
       return false;
     }
-    if (formData.batch == "") {
+    if (formData.batch === "") {
       toast.error("Choose your Batch");
       return false;
     }
-    if (formData.month == "") {
+    if (formData.month === "") {
       toast.error("Choose your Month!!");
       return false;
     }
@@ -44,7 +44,7 @@ const Form = ({ toast }) => {
     e.preventDefault();
     console.log(formData);
     if (formValidation()) {
-      const response = await fetch("http://localhost:8000/", {
+      const response = await fetch("http://127.0.0.1:8000/", {
         method: "POST", // *POST is use bcoz here we are login the user
         headers: {
           "Content-Type": "application/json",
@@ -59,9 +59,12 @@ const Form = ({ toast }) => {
         }),
       });
       const res = await response.json();
-      if(res.response){
-        toast.success("Successfully Submitted. Your Transaction ID:- "+res.ID);
-      }else{
+      if (res.response) {
+        toast.success(
+          "Successfully Submitted. Your Transaction ID:- " + res.ID
+        );
+        setformData(payload);
+      } else {
         toast.error("Internal Server Error!!");
       }
     }
@@ -230,37 +233,14 @@ const Form = ({ toast }) => {
               />
             </div>
           </div>
-
-          <div className="flex items-start mb-6">
-            <div className="flex items-center h-5">
-              <input
-                id="remember"
-                type="checkbox"
-                value=""
-                className="w-4 h-4 border border-gray-300 rounded  focus:ring-3 focus:ring-blue-300  dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                required
-              />
-            </div>
-            <label
-              htmlFor="remember"
-              className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              I agree with the{" "}
-              <a
-                href="#"
-                className="text-blue-600 hover:underline dark:text-blue-500"
-              >
-                terms and conditions
-              </a>
-              .
-            </label>
+              Submit
+            </button>
           </div>
-          <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Submit
-          </button>
         </form>
       </div>
     </div>
