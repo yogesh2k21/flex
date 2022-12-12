@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 const Form = ({ toast }) => {
+
+  // used to initialize the formData useState
   let payload = {
     name: "",
     age: "",
@@ -12,6 +14,7 @@ const Form = ({ toast }) => {
 
   const [formData, setformData] = useState(payload);
 
+  // validating input data according to given constraints
   const formValidation = () => {
     if (formData.name.length < 3) {
       toast.error("Name should be atleast 3 Character!!");
@@ -40,12 +43,13 @@ const Form = ({ toast }) => {
     return true;
   };
 
+  // this function hit the api in backend
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
     if (formValidation()) {
       const response = await fetch("http://127.0.0.1:8000/", {
-        method: "POST", // *POST is use bcoz here we are login the user
+        method: "POST", // *POST 
         headers: {
           "Content-Type": "application/json",
         },
@@ -63,13 +67,16 @@ const Form = ({ toast }) => {
         toast.success(
           "Successfully Submitted. Your Transaction ID:- " + res.ID
         );
+        //after receving response as true reset the form with initial values
         setformData(payload);
       } else {
+        // if any problem in saving data then backend will return response False and this toast invoked.
         toast.error("Internal Server Error!!");
       }
     }
   };
 
+  // take input field data and saving it in formData useState
   const onChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
   };

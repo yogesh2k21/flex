@@ -1,70 +1,116 @@
-# Getting Started with Create React App
+# Problem Statement: 
+Assume that you are the CTO for the outsourcing firm which has been chosen to build an
+admission form for the Yoga Classes which happen every month.
+Requirements for the admission form are:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Only people within the age limit of 18-65 can enroll for the monthly classes and they will
+be paying the fees on a month on month basis. I.e. an individual will have to pay the fees
+every month and he can pay it any time of the month.
+- They can enroll any day but they will have to pay for the entire month. The monthly fee is
+500/- Rs INR.
+- There are a total of 4 batches a day namely 6-7AM, 7-8AM, 8-9AM and 5-6PM. The
+participants can choose any batch in a month and can move to any other batch next
+month. I.e. participants can shift from one batch to another in different months but in
+same month they need to be in same batch
 
-## Available Scripts
+# Tools ⚒️ and Tech Stack 🧑‍💻
+- Django is used for backend, its a Python based web backend Framework.
+- ReactJS is used for frontend, its a JS Labrary.
+- TailwindCSS is used for frontend UI, its a CSS framework.
+- React-Toastify is library is used for show response in frontend when submitting form
+- Docker is used for Containerize the application to make it cloud native.
+- Database is SQLite which comes within Django when we crate new Django Project.
 
-In the project directory, you can run:
+# My Approach 🎯💡
+- I have create Form in ReactJS that takes required Data about Yoga classes admission
 
-### `npm start`
+form image
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- after taking data we are verifying that data according to the given constraints in ReactJS using condition that must be passed before going further.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- After verifying, Now taking that data and making a JSON payload in JS that is being passed in the API as data and API methiod is POST because we are saving the data via Backend in database.
 
-### `npm test`
+```
+const response = await fetch("http://127.0.0.1:8000/", {
+        method: "POST", // *POST bcoz we are send and save data in DB
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          age: formData.age,
+          phone: formData.phone,
+          batch: formData.batch,
+          month: formData.month,
+          amount: formData.amount,
+        }),
+      });
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- In backend I am taking data out from request and make a USER table object and putting all user detail in that object and saving it.
+```
+    json_data = json.loads(request.body.decode("utf-8"))
+    user=User(name=json_data['name'],age=int(json_data['age']),mobile=json_data['phone'])
+    user.save()
+```
+- after that making a new TRANSACTION table object and putting all required data in that object and along with putting that USER object in TRANSACTION table user_id field and saving it.
 
-### `npm run build`
+```
+    trans=Transaction(user=user,amount=int(json_data['amount']),status=Status.SUCCESSFULL,batch=json_data['batch'],batch_month=json_data['month'])
+    trans.save()
+```
+- after SUCCESSFULLY saving data we are returning true in JSON response that toggle the reactify-toaster popup in frontend.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+after submitting form image
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Database Schema Design 💾
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+db image
 
-### `npm run eject`
+Here I have created 2 tables TRANSACTION and USER.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## USER table detail
+- id - Primary Key
+- name
+- age
+- mobile
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## TRANSACTION table detail
+- id - Primary Key
+- amount
+- status
+- batch
+- date
+- user_id - This field is in Foreign Key Relation with USER table that denotes this transaction is of which user.
+- batch_month
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Status Enum which denoted that transaction is successfull or not
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Installation & Requirements 🏗️🏭
+- Only Docker is required in the system. We Containerize the application to make it cloud native.
+- Now run these commands given below
+```
+> git clone https://github.com/yogesh2k21/flex.git
+> cd /flex
+> docker-compose up --build
+```
+Done!!
 
-## Learn More
+Now Application is ready to use
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Just open browser and type
+```
+http://localhost:3000/
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Cloud architecture | [AWS Link](http://43.205.216.35:3000/)
+- For Hosting we are using AWS EC2.
+- Added one inbound rules on that EC2 so that it will server all in coming traffic.
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# References
+- [Django](https://www.djangoproject.com/)
+- [Django-cors-headers](https://pypi.org/project/django-cors-headers/)
+- [ReactJS](https://reactjs.org/docs/getting-started.html)
+- [React Toastify](https://www.npmjs.com/package/react-toastify)
+- [Docker](https://docs.docker.com/)
+- [AWS](https://aws.amazon.com/documentation-overview/ec2/)
