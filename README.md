@@ -1,4 +1,4 @@
-# Problem Statement: 
+# Problem Statement: 📃
 Assume that you are the CTO for the outsourcing firm which has been chosen to build an
 admission form for the Yoga Classes which happen every month.
 Requirements for the admission form are:
@@ -24,7 +24,8 @@ same month they need to be in same batch
 # My Approach 🎯💡
 - I have create Form in ReactJS that takes required Data about Yoga classes admission
 
-form image
+![Screenshot (53)](https://user-images.githubusercontent.com/52989607/206984230-1ebccabe-dfe0-4723-a329-79b244dd47af.png)
+
 
 - after taking data we are verifying that data according to the given constraints in ReactJS using condition that must be passed before going further.
 
@@ -62,10 +63,11 @@ const response = await fetch("http://127.0.0.1:8000/", {
 - after SUCCESSFULLY saving data we are returning true in JSON response that toggle the reactify-toaster popup in frontend.
 
 after submitting form image
+![Screenshot (55)](https://user-images.githubusercontent.com/52989607/206984267-23622434-54c1-4129-8455-5bee33b777e2.png)
 
 # Database Schema Design 💾
 
-db image
+![dbs](https://user-images.githubusercontent.com/52989607/206984328-f164d152-1b3e-473d-8379-b876777f1d25.png)
 
 Here I have created 2 tables TRANSACTION and USER.
 
