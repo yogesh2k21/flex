@@ -15,21 +15,20 @@ same month they need to be in same batch
 
 # Tools ⚒️ and Tech Stack 🧑‍💻
 - Django is used for backend, its a Python based web backend Framework.
-- ReactJS is used for frontend, its a JS Labrary.
+- ReactJS is used for frontend, its a JS Library.
 - TailwindCSS is used for frontend UI, its a CSS framework.
 - React-Toastify is library is used for show response in frontend when submitting form
 - Docker is used for Containerize the application to make it cloud native.
-- Database is SQLite which comes within Django when we crate new Django Project.
+- Database is SQLite which comes within Django when we create new Django Project.
 
 # My Approach 🎯💡
 - I have create Form in ReactJS that takes required Data about Yoga classes admission
 
 ![Screenshot (53)](https://user-images.githubusercontent.com/52989607/206984230-1ebccabe-dfe0-4723-a329-79b244dd47af.png)
 
-
 - after taking data we are verifying that data according to the given constraints in ReactJS using condition that must be passed before going further.
 
-- After verifying, Now taking that data and making a JSON payload in JS that is being passed in the API as data and API methiod is POST because we are saving the data via Backend in database.
+- After verifying, Now taking that data and making a JSON payload in JS that is being passed in the API as data and API methiod is POST because we are saving the data via Backend in database. API is in backend/core/urls/py and API defination is in backend/core/views.py
 
 ```
 const response = await fetch("http://127.0.0.1:8000/", {
@@ -62,14 +61,13 @@ const response = await fetch("http://127.0.0.1:8000/", {
 ```
 - after SUCCESSFULLY saving data we are returning true in JSON response that toggle the reactify-toaster popup in frontend.
 
-after submitting form image
 ![Screenshot (55)](https://user-images.githubusercontent.com/52989607/206984267-23622434-54c1-4129-8455-5bee33b777e2.png)
 
 # Database Schema Design 💾
 
 ![dbs](https://user-images.githubusercontent.com/52989607/206984328-f164d152-1b3e-473d-8379-b876777f1d25.png)
 
-Here I have created 2 tables TRANSACTION and USER.
+Here I have created 2 tables TRANSACTION and USER in backend/core/models.py
 
 ## USER table detail
 - id - Primary Key
